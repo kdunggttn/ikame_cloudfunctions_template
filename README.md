@@ -1,4 +1,4 @@
-# ÂDeploy ETL pipeline với Google Cloud Functions, Cloud Scheduler, Cloud Build và Cloud Source Repositories (Python)
+# Deploy ETL pipeline với Google Cloud Functions, Cloud Scheduler, Cloud Build và Cloud Source Repositories (Python)
 
 ## **Sơ qua các bước để deploy 1 pipeline ETL với chức năng CI/CD:**
 
