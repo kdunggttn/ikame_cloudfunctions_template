@@ -1,0 +1,15 @@
+steps:
+- name: 'docker.io/library/python:3.10'
+  entrypoint: /bin/sh
+  args: [
+    '-c',
+    'ls -R',
+    -c, 
+    'pip3 install -r /requirements.txt'
+  ]
+  dir: '/'
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: ['functions', 'deploy', '[tên_function_trên_google_cloud_functions]', '--trigger-topic=[tên_pub_sub_topic]', '--runtime=python310', '--entry-point=main']
+  dir: '/'
+options:
+  logging: CLOUD_LOGGING_ONLY

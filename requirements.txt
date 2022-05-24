@@ -1,0 +1,3 @@
+# Trong code dùng thư viện gì thì viết xuống dưới đây. Ví dụ:
+pandas
+numpy
