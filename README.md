@@ -55,6 +55,7 @@ Trong đó, thay những giá trị sau:
 
 * [tên_function_trên_google_cloud_functions]: Tên muốn đặt cho functions ở trên Google Cloud Functions. Tên chỉ mang tính chất phân biệt các functions với nhau (không ảnh hưởng đến code hay tính năng).
 * [tên_pub_sub_topic]: Tên topic được dùng để trigger job chạy function hằng ngày. Tên này được tạo ở bước 8. Tuy nhiên nếu define luôn tên topic ở đây, thì nhớ lưu lại để ở bước 8 điền lại đúng tên này vào.
+* [tên_repo_trên_source_repositories]: Tên của repo đã kết nối từ GitHub. Có dạng: "github_[tên tk github]_[tên repo trên github]. Ví dụ: "github_kdunggttn_ikame_cloudfunctions_template".
 
 ```yaml
 steps:
@@ -68,11 +69,26 @@ steps:
   ]
   dir: '/'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', '[tên_function_trên_google_cloud_functions]', '--trigger-topic=[tên_pub_sub_topic]', '--runtime=python310', '--entry-point=main']
+  args: [
+    'functions', 
+    'deploy', 
+    '[tên_function_trên_google_cloud_functions]', 
+    '--trigger-topic=[tên_pub_sub_topic]', 
+    '--runtime=python310', 
+    '--entry-point=main',
+    '--memory=8192MB',
+    '--service-account=bi-team-admin@zegobi-datacenters.iam.gserviceaccount.com',
+    '--source=https://source.developers.google.com/projects/zegobi-datacenters/repos/[tên_repo_trên_source_repositories]/moveable-aliases/master/paths/',
+    '--timeout=540'
+  ]
   dir: '/'
 options:
   logging: CLOUD_LOGGING_ONLY
 ```
+## CHANGELOG:
+-------------------------------
+**2022-05-25**: Thay đổi contents file cloudbuild.yaml vì content cũ sẽ không update source code của function khi update/deploy function mới.
+
 
 ### 5. Push repo ở local lên GitHub/BitBucket
 

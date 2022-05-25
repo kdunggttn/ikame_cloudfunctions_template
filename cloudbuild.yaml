@@ -9,7 +9,18 @@ steps:
   ]
   dir: '/'
 - name: 'gcr.io/cloud-builders/gcloud'
-  args: ['functions', 'deploy', '[tên_function_trên_google_cloud_functions]', '--trigger-topic=[tên_pub_sub_topic]', '--runtime=python310', '--entry-point=main']
+  args: [
+    'functions', 
+    'deploy', 
+    '[tên_function_trên_google_cloud_functions]', 
+    '--trigger-topic=[tên_pub_sub_topic]', 
+    '--runtime=python310', 
+    '--entry-point=main',
+    '--memory=8192MB',
+    '--service-account=bi-team-admin@zegobi-datacenters.iam.gserviceaccount.com',
+    '--source=https://source.developers.google.com/projects/zegobi-datacenters/repos/[tên_repo_trên_source_repositories]/moveable-aliases/master/paths/',
+    '--timeout=540'
+  ]
   dir: '/'
 options:
   logging: CLOUD_LOGGING_ONLY
